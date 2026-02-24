@@ -2,9 +2,9 @@
 
 ## Author
 
-* **Name**: ________________________________
-* **Register Number**: _____________________
-* **Date of Submission**: __________________
+* **Name**: HEMANTH KUMAR S
+* **Register Number**: 212224040115
+* **Date of Submission**: 24/02/2026
 
 ---
 
@@ -87,11 +87,15 @@ Create a simple HTML page and verify that it can be accessed from a web browser 
 
 (Write the steps you followed in your own words)
 
-1. ---
-2. ---
-3. ---
-4. ---
-5. ---
+1. I logged in to the AWS Management Console and created a new VPC with the CIDR block 10.0.0.0/16, which acts as a private network for deploying AWS resources.
+
+2. Inside the VPC, I created a public subnet with CIDR block 10.0.1.0/24 and enabled auto-assign public IPv4. I then created and attached an Internet Gateway and       configured a route table with a default route (0.0.0.0/0) pointing to the Internet Gateway.
+
+3. I created a Security Group and configured inbound rules to allow SSH (Port 22) for remote access and HTTP (Port 80) for web traffic.
+
+4. I launched an EC2 instance using Amazon Linux 2 AMI in the public subnet, attached the security group and key pair, and ensured the instance was in the running      state.
+
+5. I connected to the EC2 instance using SSH, installed and started the Apache web server, created a simple HTML page, and verified that the web server was             accessible through the instance’s public IP address in a browser.
 
 ---
 
@@ -100,20 +104,29 @@ Create a simple HTML page and verify that it can be accessed from a web browser 
 ### Screenshot 1: VPC and Subnet Details
 
 (Insert Screenshot Here)
+![WhatsApp Image 2026-02-24 at 11 02 10](https://github.com/user-attachments/assets/e9e759d9-dfe8-44df-9451-c81e218298fb)
 
----
+<img width="2520" height="1085" alt="Screenshot 2026-02-24 104641" src="https://github.com/user-attachments/assets/dcce0adf-9690-4245-972c-cfe704799489" />
+
+<img width="2522" height="1285" alt="Screenshot 2026-02-24 105126" src="https://github.com/user-attachments/assets/52de2c53-b759-4a00-8d46-a62aef3c8968" />
+
+
+
 
 ### Screenshot 2: EC2 Instance Running
 
 (Insert Screenshot Here)
 
----
+<img width="1919" height="1014" alt="image" src="https://github.com/user-attachments/assets/e5471e4c-0885-4c3f-a177-b5d27c5cc906" />
+
 
 ### Screenshot 3: Web Server Output in Browser
 
 (Insert Screenshot Here)
 
----
+<img width="934" height="468" alt="image" src="https://github.com/user-attachments/assets/9413acbd-2797-4efe-b50e-292cb71a1655" />
+
+
 
 ## Result 
 
