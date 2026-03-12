@@ -1,4 +1,4 @@
-# Lab 3 – Introduction to Amazon Elastic Compute Cloud (EC2)
+# Lab 4 – Working with Amazon Elastic Block Store (EBS)
 
 ## Author
 
@@ -10,7 +10,7 @@
 
 ## Objective
 
-The objective of this experiment is to understand the fundamentals of Amazon Elastic Compute Cloud (EC2). This lab focuses on launching and managing a virtual server, understanding instance types and AMIs, connecting to an EC2 instance, monitoring its status, and performing basic instance operations such as start, stop, and terminate.
+The objective of this experiment is to understand how Amazon Elastic Block Store (EBS) provides persistent block-level storage for EC2 instances. This lab focuses on creating and attaching an EBS volume, formatting and mounting it on an EC2 instance, storing data, and verifying data persistence after instance reboot.
 
 ---
 
@@ -18,8 +18,8 @@ The objective of this experiment is to understand the fundamentals of Amazon Ela
 
 * Basic understanding of cloud computing concepts
 * AWS account or AWS Academy Lab access
-* Web browser with internet connectivity
-* Basic knowledge of Linux commands (optional)
+* An existing EC2 instance (Amazon Linux 2 preferred)
+* Basic knowledge of Linux commands
 
 ---
 
@@ -27,104 +27,85 @@ The objective of this experiment is to understand the fundamentals of Amazon Ela
 
 * AWS Management Console
 * Amazon EC2
-* Key Pair
-* Security Group
-* SSH Client (PuTTY / Terminal)
+* Amazon EBS
+* SSH Client (Terminal / PuTTY)
 
 ---
 
 ## Tasks Performed
 
-### Task 1: Explore Amazon EC2 Dashboard
+### Task 1: Explore Amazon EBS
 
-Explore the EC2 service dashboard in the AWS Management Console. Observe the different sections such as Instances, AMIs, Instance Types, Key Pairs, Security Groups, and Elastic IPs.
-
----
-
-### Task 2: Launch an EC2 Instance
-
-Launch a new EC2 instance using Amazon Linux 2 AMI. Select an appropriate instance type (t2.micro) under the free tier. Configure basic settings such as instance name, key pair, and security group.
+Explore the Amazon EBS service through the EC2 dashboard. Observe different volume types such as General Purpose SSD (gp2/gp3), Provisioned IOPS SSD, Throughput Optimized HDD, and Cold HDD.
 
 ---
 
-### Task 3: Configure Security Group
+### Task 2: Create an EBS Volume
 
-Configure a security group to allow inbound access:
-
-* SSH (Port 22) from your IP address
-* HTTP (Port 80) from anywhere (0.0.0.0/0)
-
-This security group acts as a firewall for the instance.
+Create a new EBS volume in the same Availability Zone as the EC2 instance. Choose an appropriate size and volume type.
 
 ---
 
-### Task 4: Connect to EC2 Instance
+### Task 3: Attach EBS Volume to EC2 Instance
 
-Connect to the running EC2 instance using SSH. Use the downloaded key pair and connect via terminal or PuTTY.
-
-For Amazon Linux:
-
-```
-ssh -i "keyname.pem" ec2-user@<Public-IP>
-```
+Attach the created EBS volume to the running EC2 instance as an additional block device.
 
 ---
 
-### Task 5: Perform Basic Instance Operations
+### Task 4: Format the EBS Volume
 
-Perform the following operations from the EC2 console:
-
-* Stop the instance
-* Start the instance
-* Reboot the instance
-
-Observe the state changes of the instance.
+Connect to the EC2 instance using SSH and format the attached volume with a file system (for example, ext4).
 
 ---
 
-### Task 6: Monitor EC2 Instance
+### Task 5: Mount the EBS Volume
 
-Monitor the EC2 instance using the Monitoring tab. Observe metrics such as CPU utilization, network in/out, and instance status checks.
+Mount the formatted volume to a directory in the EC2 instance (for example, /data or /mnt/ebs).
 
 ---
 
-### Task 7: Terminate EC2 Instance
+### Task 6: Store Data in EBS Volume
 
-Terminate the EC2 instance after completing the experiment to avoid unnecessary AWS charges.
+Create files and directories inside the mounted EBS volume and store sample data.
+
+---
+
+### Task 7: Verify Data Persistence
+
+Reboot the EC2 instance and verify that the data stored in the EBS volume is still available after reboot.
 
 ---
 
 ## Workflow (Student Explanation)
 
+1.Created an Amazon EBS volume
 
-1. Launched a new EC2 instance named Web Server in the N. Virginia region using Amazon Linux 2023 AMI and t2.micro instance type.
-2. Enabled termination protection and stop protection, configured a security group, and added a user data script to install and start an Apache web server.
-3. Monitored the instance using status checks, CloudWatch metrics, and system logs to ensure it was running properly.
-4. Modified the security group to allow HTTP (port 80) traffic and accessed the web server using the public IP address.
-5. Resized the instance to t2.small, increased the EBS volume size, explored EC2 service quotas, tested stop protection, and finally stopped the instance.
+2.Attached the volume to an EC2 instance
 
----
+3.Created a file system on the volume
+
+4.Added a file to volume
+
+5.Created a snapshot of volume
+
+6.Created a new volume from the snapshot
+
+7.Attached and mounted the new volume to the EC2 instance
 
 ## Output Screenshots (Attach 3)
 
-### Screenshot 1: EC2 Dashboard / Instance List
+### Screenshot 1: EBS Volume Created
 
-<img width="1919" height="971" alt="Screenshot 2026-02-27 133221" src="https://github.com/user-attachments/assets/50d9bbc1-7077-47f3-a9ab-22e2261eaba9" />
+<img width="1919" height="975" alt="Screenshot 2026-02-27 222411" src="https://github.com/user-attachments/assets/9a86ee57-e788-45a2-8f64-4aeb61d24b99" />
 
----
+### Screenshot 2: EBS Volume Attached to EC2
 
-### Screenshot 2: SSH Connection to Instance
+<img width="1919" height="969" alt="Screenshot 2026-02-27 223617" src="https://github.com/user-attachments/assets/42369374-3703-4ae0-80c3-530a10ffa889" />
 
-<img width="1919" height="1079" alt="Screenshot 2026-02-27 140029" src="https://github.com/user-attachments/assets/afa3210b-2276-4e72-8c0d-23e912075cf3" />
+### Screenshot 3: Mounted Volume with Data
 
----
+<img width="1919" height="974" alt="Screenshot 2026-02-27 224343" src="https://github.com/user-attachments/assets/f47fb6d2-cb69-4a10-9c81-f626409cb9a1" />
 
-### Screenshot 3: Instance Monitoring / Status
+## Result / Conclusion
 
-<img width="1919" height="973" alt="Screenshot 2026-02-27 143245" src="https://github.com/user-attachments/assets/a62d5a3b-8a1b-4165-af26-a417969e1338" />
-
----
-
-## Result 
-
-This experiment provided hands-on experience with Amazon EC2 by demonstrating how to launch, connect, manage, and monitor a virtual server in AWS. It helped in understanding the concept of Infrastructure as a Service (IaaS) and how compute resources can be provisioned and controlled on demand in the cloud.
+This experiment demonstrated how Amazon EBS provides persistent storage for EC2 instances. By creating, attaching, formatting, and mounting an EBS volume, and by verifying data after reboot, the concept of durable block storage in the cloud was clearly understood.
